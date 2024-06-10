@@ -14,26 +14,18 @@
             overflow: hidden;
         }
         .chatbot-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100%; /* Adjust the width percentage as needed */
-            margin: 0 auto; /* This centers the container horizontally */
-            position: relative;
-        }
-        .border-gradient {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: -1;
-            background: linear-gradient(to right, #000000, #000000);
-            pointer-events: none;
-            border-radius: 10px;
-            border: 3px solid transparent;
+            display: none; /* Initially hide the chatbot container */
+            position: fixed;
+            top: 20px; /* Position at the top of the page */
+            right: 50%; /* Center horizontally */
+            transform: translateX(50%); /* Center horizontally */
+            z-index: 9999; /* Ensure it appears above other elements */
+            width: 100%; /* Adjust the width as needed */
+            max-width: 500px; /* Adjust the maximum width as needed */
+            background-color: #0d0d0d;
+            border-radius: 0 0 20px 20px; /* Rounded corners on the bottom left */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
         .container {
             max-width: 500px;
@@ -121,6 +113,18 @@
         .fa-robot {
             margin-right: 10px;
         }
+        #openChatbotBtn {
+            position: fixed;
+            top: 20px; /* Position at the top of the page */
+            right: 20px;
+            z-index: 9999; /* Ensure it appears above other elements */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -135,6 +139,9 @@
             <button id="sendBtn" onclick="sendMessage()">Send</button>
         </div>
     </div>
+
+    <!-- Open chatbot button -->
+    <button id="openChatbotBtn">Open Chatbot</button>
 
     <script>
         async function sendMessage() {
@@ -169,7 +176,23 @@
             document.getElementById('userInput').value = '';
             responseDiv.scrollTop = responseDiv.scrollHeight;
         }
+        
+        // Get reference to the open chatbot button
+        const openChatbotBtn = document.getElementById('openChatbotBtn');
+        // Get reference to the chatbot container
+        const chatbotContainer = document.querySelector('.chatbot-container');
+
+        // Function to toggle the visibility of the chatbot container
+        function toggleChatbotContainer() {
+            if (chatbotContainer.style.display === 'none') {
+                chatbotContainer.style.display = 'block';
+            } else {
+                chatbotContainer.style.display = 'none';
+            }
+        }
+
+        // Add click event listener to the open chatbot button
+        openChatbotBtn.addEventListener('click', toggleChatbotContainer);
     </script>
-    
 </body>
 </html>
