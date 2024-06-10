@@ -11,7 +11,7 @@ def home():
 def chat():
     user_input = request.json.get("message")
     response = chatbot_response(user_input)  # Call the chatbot_response function
-    return jsonify({"response": response})
+    return jsonify({"response": response})  # Return response in JSON format
 
 if __name__ == '__main__':
     app.run(debug=True)
